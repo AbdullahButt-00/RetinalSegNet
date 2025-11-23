@@ -1,0 +1,32 @@
+[
+  {
+    "timestamp": "2025-11-23T00:47:21.780366",
+    "filename": "01_test.tif",
+    "dataset_type": "DRIVE",
+    "inference_time": 1.1152210235595703,
+    "metrics": {
+      "model": "DRIVE",
+      "inference_time": 1.1152210235595703
+    }
+  },
+  {
+    "timestamp": "2025-11-23T00:48:39.728967",
+    "filename": "01_test.tif",
+    "dataset_type": "DRIVE",
+    "inference_time": 1.023944616317749,
+    "metrics": {
+      "model": "DRIVE",
+      "inference_time": 1.023944616317749
+    }
+  },
+  {
+    "timestamp": "2025-11-23T12:56:33.890483",
+    "filename": "01_test.tif",
+    "dataset_type": "DRIVE",
+    "inference_time": 0.9931066036224365,
+    "metrics": {
+      "model": "DRIVE",
+      "inference_time": 0.9931066036224365
+    }
+  }
+]
