@@ -32,7 +32,7 @@ The app provides:
     │     ├── weight_manager.py
     │     └── data_utils.py
     │── data/  
-    │── log/                 # Logging & debug files
+    │── logs/                 # Logging & debug files
 
 ------------------------------------------------------------------------
 
