@@ -14,7 +14,7 @@ The model combines convolutional layers with multi-head self-attention in the en
 
 ---
 
-## 📑 Table of Contents
+## Table of Contents
 
 - [Features](#features)
 - [Repository Structure](#repository-structure)
@@ -25,20 +25,20 @@ The model combines convolutional layers with multi-head self-attention in the en
 - [Discussion & Limitations](#discussion--limitations)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
+- [Contributors](#contributors)
 - [License](#license)
 
 ---
 
-## ✨ Features
+## Features
 
-- 🎯 **Efficient multitask segmentation** of retinal vessels and optic disc
-- 🚀 **Lightweight model**: small memory footprint (~2.6M parameters) and low FLOPs
-- 🧠 **Attention mechanisms** for enhanced feature representation
-- 📊 **Comprehensive evaluation** with multiple metrics (F1, IoU, Dice, Sensitivity, Specificity)
-- 🖥️ **Interactive Streamlit application** for real-time inference
-- 📈 **Complete training pipeline** with data augmentation and model checkpointing
-- 🔄 **Automatic weight management** with GitHub integration
+- **Efficient multitask segmentation** of retinal vessels and optic disc
+- **Lightweight model**: small memory footprint with 57,810 parameters and low FLOPs
+- **Attention mechanisms** for enhanced feature representation
+- **Comprehensive evaluation** with multiple metrics (F1, IoU, Dice, Sensitivity, Specificity)
+- **Interactive Streamlit application** for real-time inference
+- **Complete training pipeline** with data augmentation and model checkpointing
+- **Automatic weight management** with GitHub integration
 
 ---
 
@@ -66,22 +66,8 @@ RetinalSegNet/
 │
 ├── dataset/                                # Dataset storage and processing
 │   ├── data_raw/                          # Raw dataset files
-│   │   ├── aria-hrf-iostar-data/         # ARIA, HRF, IOSTAR datasets
+│   │   ├── aria-hrf-iostar-data/         # IOSTAR dataset
 │   │   │   └── resized-images/
-│   │   │       ├── ARIA/                 # ARIA dataset
-│   │   │       │   ├── Test/
-│   │   │       │   │   ├── Images/
-│   │   │       │   │   └── Labels/
-│   │   │       │   └── Train/
-│   │   │       │       ├── Images/
-│   │   │       │       └── Labels/
-│   │   │       ├── HRF/                  # HRF dataset
-│   │   │       │   ├── Test/
-│   │   │       │   │   ├── Images/
-│   │   │       │   │   └── Labels/
-│   │   │       │   └── Train/
-│   │   │       │       ├── Images/
-│   │   │       │       └── Labels/
 │   │   │       └── IOSTAR/               # IOSTAR dataset
 │   │   │           ├── Test/
 │   │   │           │   ├── Images/
@@ -133,7 +119,7 @@ Contains the Streamlit web application for interactive retinal segmentation. Fea
 
 #### **dataset/**
 Houses all dataset files:
-- **data_raw/**: Original datasets (DRIVE, IOSTAR, ARIA, HRF) with train/test splits
+- **data_raw/**: Original datasets (DRIVE, IOSTAR) with train/test splits
 - **drive_iostar_augmented/**: Preprocessed and augmented data ready for training
 - Images are resized to 512×512 for consistent processing
 
@@ -164,13 +150,9 @@ Development and experimentation notebooks:
 - **Resolution**: Resized to 512×512
 - **Annotations**: Optic disc ground truth masks
 
-### Additional Datasets
-- **ARIA**: Automated Retinal Image Analysis dataset
-- **HRF**: High-Resolution Fundus dataset
-
 ---
 
-## 🏗️ Methodology & System Architecture
+## Methodology & System Architecture
 
 ### Model Architecture
 
@@ -211,7 +193,7 @@ Combined loss for multi-task learning:
 
 ---
 
-## 🛠️ Implementation Details
+## Implementation Details
 
 ### Technology Stack
 - **Framework**: TensorFlow 2.17.0 / Keras
@@ -225,7 +207,7 @@ Combined loss for multi-task learning:
 |-----------|-------|
 | Input Size | 512×512×3 |
 | Batch Size | 8 |
-| Epochs | 50-100 |
+| Epochs | 300 |
 | Optimizer | Adam |
 | Learning Rate | 1e-4 (with decay) |
 | Data Augmentation | Rotation, flipping, scaling, brightness |
@@ -244,7 +226,7 @@ Combined loss for multi-task learning:
 
 ---
 
-## 🧪 Experiments & Results
+## Experiments & Results
 
 ### Performance Metrics
 
@@ -274,27 +256,15 @@ Combined loss for multi-task learning:
 
 | Metric | Value |
 |--------|-------|
-| **Parameters** | ~2.6M |
-| **FLOPs** | ~8.3 GFLOPs |
+| **Parameters** | 57,810 |
+| **FLOPs** | 2.5961 GFLOPs |
 | **Inference Time** | ~45ms (GPU) / ~180ms (CPU) |
-| **Model Size** | ~31 MB (.h5) |
-
-### Training Curves
-Training demonstrates stable convergence:
-- **DRIVE**: Converges around epoch 40-50
-- **IOSTAR**: Converges around epoch 30-40
-- **Validation Loss**: Consistent decrease with minimal overfitting
-
-### Qualitative Results
-Visual segmentation quality shows:
-- ✅ Accurate vessel topology preservation
-- ✅ Precise optic disc boundary detection
-- ✅ Minimal false positives in background regions
-- ✅ Robust performance on varied image qualities
+| **Model Size** | 0.2205 MB (float32) |
+| **Activation Memory** | 22.0009 MB |
 
 ---
 
-## 💭 Discussion & Limitations
+## Discussion & Limitations
 
 ### Strengths
 1. **Lightweight Architecture**: Suitable for deployment on resource-constrained devices
@@ -305,43 +275,43 @@ Visual segmentation quality shows:
 
 ### Limitations
 
-#### 1. **Dataset Size**
+#### 1. Dataset Size
 - DRIVE (40 images) and IOSTAR (30 images) are relatively small
 - **Impact**: May limit generalization to diverse retinal conditions
 - **Mitigation**: Extensive data augmentation, transfer learning potential
 
-#### 2. **Thin Vessel Detection**
+#### 2. Thin Vessel Detection
 - Struggles with fine capillary vessels (<2 pixels wide)
 - **Cause**: Downsampling in encoder loses fine spatial details
 - **Future Work**: Multi-scale feature fusion, higher resolution training
 
-#### 3. **Pathological Cases**
+#### 3. Pathological Cases
 - Limited exposure to diseased retinas (diabetic retinopathy, glaucoma)
 - **Solution**: Incorporate pathological datasets (e.g., STARE, CHASE_DB1)
 
-#### 4. **Computational Cost**
+#### 4. Computational Cost
 - Transformer attention layers increase FLOPs vs. pure CNNs
 - **Trade-off**: Accuracy gains justify moderate compute overhead
 
-#### 5. **Domain Shift**
+#### 5. Domain Shift
 - Performance degrades on datasets with different acquisition protocols
 - **Observation**: Color tone, contrast, and resolution variations affect robustness
 - **Remedy**: Domain adaptation techniques, normalization strategies
 
-#### 6. **Real-Time Inference**
+#### 6. Real-Time Inference
 - ~180ms CPU inference may be slow for real-time clinical workflows
 - **Recommendation**: GPU deployment or model quantization for speedup
 
 ### Future Directions
-- 🔬 **Cross-Dataset Validation**: Test on STARE, CHASE_DB1, HRF
-- 🧬 **3D Extensions**: Extend to OCT (Optical Coherence Tomography) volumes
-- 📱 **Mobile Deployment**: Optimize for TensorFlow Lite / ONNX
-- 🤖 **Semi-Supervised Learning**: Leverage unlabeled retinal images
-- 🩺 **Clinical Integration**: Validate in real-world ophthalmology settings
+- **Cross-Dataset Validation**: Test on STARE, CHASE_DB1, HRF
+- **3D Extensions**: Extend to OCT (Optical Coherence Tomography) volumes
+- **Mobile Deployment**: Optimize for TensorFlow Lite / ONNX
+- **Semi-Supervised Learning**: Leverage unlabeled retinal images
+- **Clinical Integration**: Validate in real-world ophthalmology settings
 
 ---
 
-## 🚀 Installation
+## Installation
 
 ### Prerequisites
 - Python 3.10 or higher
@@ -369,7 +339,7 @@ pip install tensorflow==2.17.0 keras numpy pandas matplotlib scikit-learn opencv
 
 ---
 
-## 📖 Usage
+## Usage
 
 ### 1. Streamlit Web Application
 
@@ -413,28 +383,22 @@ Load pre-trained weights and process multiple images programmatically.
 
 ---
 
-## 👥 Contributing
+## Contributors
 
-We welcome contributions! Please follow these guidelines:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-### Contributors
 - **Abdullah Butt** - [@AbdullahButt-00](https://github.com/AbdullahButt-00)
+- **Sami Naeem** - [@itsami12](https://github.com/itsami12)
+- **Hussain Ahmad** - [@AIStrikerX](https://github.com/AIStrikerX)
+- **Haseeb Ali** - [@Haseeb98-Git](https://github.com/Haseeb98-Git)
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Original RetinaLiteNet paper authors
 - [Mehwish4593/RetinaLiteNet](https://github.com/Mehwish4593/RetinaLiteNet) for reference implementation
@@ -443,7 +407,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 📧 Contact
+## Contact
 
 For questions or collaboration:
 - **GitHub Issues**: [RetinalSegNet Issues](https://github.com/AbdullahButt-00/RetinalSegNet/issues)
@@ -451,7 +415,7 @@ For questions or collaboration:
 
 ---
 
-## 📚 Citation
+## Citation
 
 If you use this implementation, please cite the original paper:
 
