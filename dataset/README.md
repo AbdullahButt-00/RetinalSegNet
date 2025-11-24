@@ -7,11 +7,32 @@ This directory contains all datasets used for training and evaluating the Retina
 ```
 dataset/
 ├── data_raw/                    # Raw, unprocessed datasets
-│   ├── aria-hrf-iostar-data/   # ARIA, HRF, and IOSTAR datasets
+│   ├── aria-hrf-iostar-data/   # IOSTAR dataset
+│   │   └── resized-images/
+│   │       └── IOSTAR/          # IOSTAR dataset
+│   │           ├── Test/
+│   │           │   ├── Images/
+│   │           │   └── Labels/
+│   │           └── Train/
+│   │               ├── Images/
+│   │               └── Labels/
 │   └── DRIVE/                   # DRIVE dataset
+│       ├── test/
+│       │   ├── images/
+│       │   └── mask/
+│       └── training/
+│           ├── 1st_manual/
+│           ├── images/
+│           └── mask/
 └── drive_iostar_augmented/      # Preprocessed and augmented data
     ├── train/                   # Training data
+    │   ├── bv_masks/           # Blood vessel masks
+    │   ├── images/             # Augmented images
+    │   └── od_masks/           # Optic disc masks
     └── val/                     # Validation data
+        ├── bv_masks/           # Blood vessel masks
+        ├── images/             # Validation images
+        └── od_masks/           # Optic disc masks
 ```
 
 ---
@@ -70,36 +91,6 @@ IOSTAR/
 
 **Download**: [IOSTAR Dataset](http://www.retinacheck.org/datasets)
 
----
-
-### 3. ARIA (Automated Retinal Image Analysis)
-
-**Purpose**: Additional training data for vessel segmentation  
-**Location**: `data_raw/aria-hrf-iostar-data/resized-images/ARIA/`
-
-**Structure**:
-```
-ARIA/
-├── Test/
-│   ├── Images/
-│   └── Labels/
-└── Train/
-    ├── Images/
-    └── Labels/
-```
-
-**Specifications**:
-- **Resolution**: Resized to 512×512
-- **Format**: .png
-- **Use Case**: Cross-dataset validation
-
----
-
-### 4. HRF (High-Resolution Fundus)
-
-**Purpose**: High-quality vessel annotations  
-**Location**: `data_raw/aria-hrf-iostar-data/resized-images/HRF/`
-
 **Structure**:
 ```
 HRF/
@@ -110,11 +101,6 @@ HRF/
     ├── Images/
     └── Labels/
 ```
-
-**Specifications**:
-- **Resolution**: High-resolution (resized to 512×512 for compatibility)
-- **Quality**: Professional-grade annotations
-- **Format**: .png
 
 ---
 
@@ -148,8 +134,8 @@ drive_iostar_augmented/
 - ✅ Gaussian noise addition
 
 **Statistics**:
-- **Training Samples**: ~500-1000 augmented images
-- **Validation Samples**: ~100-200 images
+- **Training Samples**: 640 augmented images
+- **Validation Samples**: 160 images
 - **Image Size**: 512×512×3
 - **Mask Type**: Binary (0 or 255)
 
@@ -247,12 +233,10 @@ val_images, val_bv, val_od = load_data('drive_iostar_augmented', 'val')
 |---------|------|-------|------|-------|------------|
 | DRIVE | Blood Vessels | 20 | 20 | 40 | 512×512 |
 | IOSTAR | Optic Disc | ~24 | ~6 | 30 | 512×512 |
-| ARIA | Blood Vessels | Variable | Variable | - | 512×512 |
-| HRF | Blood Vessels | Variable | Variable | - | 512×512 |
 
 **After Augmentation**:
-- **Training Images**: ~800-1200
-- **Validation Images**: ~150-250
+- **Training Images**: 640
+- **Validation Images**: 160
 
 ---
 
@@ -270,8 +254,6 @@ val_images, val_bv, val_od = load_data('drive_iostar_augmented', 'val')
 
 - **DRIVE**: Staal et al., "Ridge-based vessel segmentation in color images of the retina"
 - **IOSTAR**: Zhang et al., "IOSTAR vessel segmentation database"
-- **ARIA**: Retinal Image Analysis Group
-- **HRF**: Budai et al., "Robust Vessel Segmentation in Fundus Images"
 
 ---
 
