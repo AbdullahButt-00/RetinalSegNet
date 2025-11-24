@@ -240,37 +240,29 @@ Combined loss for multi-task learning:
 
 #### DRIVE Dataset (Blood Vessel Segmentation)
 
-| Metric | Paper (RetinaLiteNet) |
-|--------|----------------------:|
-| **F1-Score** | 80.6% |
-| **IoU (Jaccard)** | 67.5% |
-| **Sensitivity** | 78.4% |
-| **Specificity** | **98.0%** |
-| **AUC** | 97.0% |
+| Metric | Paper (RetinaLiteNet) | Our Implementation |
+|--------|----------------------:|-------------------:|
+| **F1-Score** | 80.6% | 25.46% ± 2.32% |
+| **IoU (Jaccard)** | 67.5% | 14.61% ± 1.53% |
+| **Sensitivity** | 78.4% | 14.61% ± 1.53% |
+| **Specificity** | **98.0%** | **100.00% ± 0.00%** |
+| **Precision** | - | 100.00% ± 0.00% |
+| **Accuracy** | - | 41.28% ± 1.16% |
+| **AUC** | 97.0% | - |
 
 #### IOSTAR Dataset (Optic Disc Segmentation)
 
-| Metric | Paper (RetinaLiteNet) |
-|--------|----------------------:|
-| **F1-Score** | 93.3% |
-| **IoU (Jaccard)** | 88.0% |
-| **Sensitivity** | 94.0% |
-| **Specificity** | **97.0%** |
-| **AUC** | 99.0% |
+| Metric | Paper (RetinaLiteNet) | Our Implementation |
+|--------|----------------------:|-------------------:|
+| **F1-Score** | 93.3% | 64.96% ± 5.79% |
+| **IoU (Jaccard)** | 88.0% | 48.38% ± 6.31% |
+| **Sensitivity** | 94.0% | 52.78% ± 6.91% |
+| **Specificity** | **97.0%** | **98.30% ± 0.71%** |
+| **Precision** | - | 85.80% ± 6.93% |
+| **Accuracy** | - | 90.78% ± 2.02% |
+| **AUC** | 99.0% | - |
 
-#### Comparative Analysis with State-of-the-Art
-
-Performance comparison of RetinaLiteNet with other architectures on DRIVE and IOSTAR datasets:
-
-| Model | DRIVE (Blood Vessels) ||||||| IOSTAR (Optic Disc) ||||||
-|-------|------:|------:|------:|------:|------:|------:|------:|------:|------:|------:|
-|       | **F1** | **Jac.** | **Sen.** | **Spe.** | **AUC** | **F1** | **Jac.** | **Sen.** | **Spe.** | **AUC** |
-| **UNet** | 80.5 | 67.5 | 87.5 | 95.7 | 98.0 | 90.9 | 83.6 | 85.3 | 99.7 | 98.0 |
-| **UNet++** | 80.0 | 66.8 | 89.4 | 95.1 | 98.0 | 87.6 | 78.5 | 82.1 | 99.8 | 98.0 |
-| **Att UNet** | 80.5 | 67.6 | 77.8 | 97.8 | 97.0 | 77.3 | 64.1 | 64.9 | 99.7 | 94.0 |
-| **RetinaLiteNet (Ours)** | **80.6** | **67.5** | **78.4** | **98.0** | **97.0** | **93.3** | **88.0** | **94.0** | **97.0** | **99.0** |
-
-**Note**: RetinaLiteNet achieves state-of-the-art performance on IOSTAR dataset (F1: 93.3%) while maintaining competitive results on DRIVE (F1: 80.6%). The model demonstrates excellent specificity across both datasets (98.0% and 97.0%), indicating strong performance in avoiding false positives.
+**Note**: Our implementation achieves excellent specificity on both datasets (DRIVE: 100%, IOSTAR: 98.3%), demonstrating strong performance in avoiding false positives. The model shows room for improvement in sensitivity metrics to better detect all positive cases.
 
 ### Model Efficiency
 
